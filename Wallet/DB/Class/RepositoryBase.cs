@@ -9,8 +9,8 @@ namespace DB.Class
 {
     public class RepositoryBase<TContext, TEntity> : IRepositoryBase<TEntity> where TEntity : class where TContext : DbContext, new()
     {
-        
-        private TContext _Context = new TContext();
+
+        TContext _Context;
         public TContext Context
         {
             get { return _Context; }
@@ -19,47 +19,48 @@ namespace DB.Class
 
         public RepositoryBase()
         {
-            
+            _Context = new TContext();
         }
 
         public bool Add(TEntity pEntity)
         {
-            throw new NotImplementedException();
+            _Context.Add(pEntity);
         }
 
         public bool Add(IList<TEntity> pEntities)
         {
-            throw new NotImplementedException();
+            _Context.AddRange(pEntities.ToArray());
         }
 
         public int Delete(TEntity pEntity)
         {
-            throw new NotImplementedException();
+            _Context.Remove(pEntity);
         }
 
         public int Delete(IList<TEntity> pEntities)
         {
-            throw new NotImplementedException();
+            _Context.RemoveRange(pEntities.ToArray());
         }
 
         public int Edit(TEntity pEntity)
         {
-            throw new NotImplementedException();
+
+            _Context.Update(pEntity);
         }
 
         public IQueryable<TEntity> FindBy(Expression<Func<TEntity, bool>> pPredicate)
         {
-            throw new NotImplementedException();
+            
         }
 
         public IQueryable<TEntity> GetAll()
         {
-            throw new NotImplementedException();
+            return _Context.Find()
         }
 
-        public bool Save()
+        public void Save()
         {
-            throw new NotImplementedException();
+            _Context.SaveChanges();
         }
     }
 }

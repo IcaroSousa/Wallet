@@ -17,6 +17,6 @@ namespace DB.Interface
         int Delete(IList<TEntity> pEntities);
 
         int Edit(TEntity pEntity);
-        bool Save();
+        void Save();
     }
 }
