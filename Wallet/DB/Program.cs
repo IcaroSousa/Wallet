@@ -4,21 +4,27 @@ namespace DB
 {
     class Program
     {
-        static double MealCost(double pMealPrice, int pTipPercentage, int pTax)
-        {
-            double lTipValue = (pMealPrice * pTipPercentage) / 100;
-            double lTax = (pMealPrice * pTax) / 100;
-            return (int)Math.Round(pMealPrice + lTipValue + lTax);
-        }
 
         static void Main(string[] args)
         {
-            double lMealPrice; double.TryParse(Console.ReadLine(), out lMealPrice);
-            double lTipTax; double.TryParse(Console.ReadLine(), out lTipTax);
-            double lTax; double.TryParse(Console.ReadLine(), out lTax);
+            int lNumber; int.TryParse(Console.ReadLine(), out lNumber);
 
-            Console.WriteLine($"The total meal cost is {MealCost(lMealPrice, (int)lTipTax, (int)lTax)} dollars.");
-            Console.ReadLine();
+            if(lNumber % 2 != 0)
+            {
+                Console.WriteLine("Weird");
+            }
+            else
+            {
+                if(lNumber > 20 || (lNumber >= 2 && lNumber <= 5))
+                {
+                    Console.WriteLine("Not Weird");
+                }
+                else 
+                if(lNumber >= 6 && lNumber <= 20)    
+                {
+                    Console.WriteLine("Weird");                   
+                }
+            }
         }
     }
 }
