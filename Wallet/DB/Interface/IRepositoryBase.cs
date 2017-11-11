@@ -10,13 +10,13 @@ namespace DB.Interface
         IQueryable<TEntity> GetAll();
         IQueryable<TEntity> FindBy(Expression<Func<TEntity, bool>> pPredicate);
 
-        bool Add(TEntity pEntity);
-        bool Add(IList<TEntity> pEntities);
+        void Add(TEntity pEntity);
+        void Add(IList<TEntity> pEntities);
 
-        int Delete(TEntity pEntity);
-        int Delete(IList<TEntity> pEntities);
+        void Delete(TEntity pEntity);
+        void Delete(IList<TEntity> pEntities);
 
-        int Edit(TEntity pEntity);
+        void Edit(TEntity pEntity);
         void Save();
     }
 }

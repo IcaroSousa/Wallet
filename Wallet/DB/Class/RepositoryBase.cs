@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DB.Class
 {
-    public class RepositoryBase<TContext, TEntity> : IRepositoryBase<TEntity> where TEntity : class where TContext : DbContext, new()
+    public abstract class RepositoryBase<TContext, TEntity> : IRepositoryBase<TEntity> where TEntity : class where TContext : DbContext, new()
     {
 
         TContext _Context;
@@ -22,45 +22,20 @@ namespace DB.Class
             _Context = new TContext();
         }
 
-        public bool Add(TEntity pEntity)
-        {
-            _Context.Add(pEntity);
-        }
+        public virtual void Add(TEntity pEntity) => _Context.Set<TEntity>().Add(pEntity);
 
-        public bool Add(IList<TEntity> pEntities)
-        {
-            _Context.AddRange(pEntities.ToArray());
-        }
+        public virtual void Add(IList<TEntity> pEntities) => _Context.Set<TEntity>().AddRange(pEntities.ToArray());
 
-        public int Delete(TEntity pEntity)
-        {
-            _Context.Remove(pEntity);
-        }
+        public virtual void Delete(TEntity pEntity) => _Context.Set<TEntity>().Remove(pEntity);
 
-        public int Delete(IList<TEntity> pEntities)
-        {
-            _Context.RemoveRange(pEntities.ToArray());
-        }
+        public virtual void Delete(IList<TEntity> pEntities) => _Context.Set<TEntity>().RemoveRange(pEntities.ToArray());
 
-        public int Edit(TEntity pEntity)
-        {
+        public virtual void Edit(TEntity pEntity) => _Context.Set<TEntity>().Update(pEntity);
 
-            _Context.Update(pEntity);
-        }
+        public virtual IQueryable<TEntity> FindBy(Expression<Func<TEntity, bool>> pPredicate) => _Context.Set<TEntity>().Where(pPredicate);
 
-        public IQueryable<TEntity> FindBy(Expression<Func<TEntity, bool>> pPredicate)
-        {
-            
-        }
+        public virtual IQueryable<TEntity> GetAll() => _Context.Set<TEntity>();
 
-        public IQueryable<TEntity> GetAll()
-        {
-            return _Context.Find()
-        }
-
-        public void Save()
-        {
-            _Context.SaveChanges();
-        }
+        public virtual void Save() => _Context.SaveChanges();
     }
 }
