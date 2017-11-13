@@ -1,5 +1,5 @@
 ﻿using System;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.int.TryParse(lParam[0].ToString(), out int lNum1);EntityFrameworkCore;
 
 namespace Wallet.DB
 {

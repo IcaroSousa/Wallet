@@ -1,30 +1,52 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace DB
 {
-    class Program
+    public class Person
     {
+        public int age;
 
-        static void Main(string[] args)
+        public Person(int pInitialAge)
         {
-            int lNumber; int.TryParse(Console.ReadLine(), out lNumber);
-
-            if(lNumber % 2 != 0)
+            if (pInitialAge < 0)
             {
-                Console.WriteLine("Weird");
+                age = 0;
+                Console.WriteLine("Age is not valid, setting age to 0.");
+            }
+        }
+
+        public void amIOld()
+        {
+            if (age < 13)
+            {
+                Console.WriteLine("You are young.");
+            }
+            else if (age >= 13 && age < 18)
+            {
+                Console.WriteLine("You are a teenager.");
             }
             else
             {
-                if(lNumber > 20 || (lNumber >= 2 && lNumber <= 5))
-                {
-                    Console.WriteLine("Not Weird");
-                }
-                else 
-                if(lNumber >= 6 && lNumber <= 20)    
-                {
-                    Console.WriteLine("Weird");                   
-                }
+                Console.WriteLine("You are old.");
             }
         }
+
+        public void yearPasses()
+        {
+            age++;
+        }
+    }
+
+    static class Program
+    {
+        public static void Main()
+        {
+            Person lPerson = new Person(-1);
+            lPerson.amIOld();
+            lPerson.yearPasses();
+        }
+
     }
 }
