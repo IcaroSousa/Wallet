@@ -20,6 +20,7 @@ namespace DB.Class
         public RepositoryBase()
         {
             _Context = new TContext();
+            //_Context.Database.EnsureCreated();
         }
 
         public virtual void Add(TEntity pEntity) => _Context.Set<TEntity>().Add(pEntity);

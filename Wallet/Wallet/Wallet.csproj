@@ -8,4 +8,7 @@
   <ItemGroup>
     <Folder Include="DB\" />
   </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="DB\DbBase.cs" />
+  </ItemGroup>
 </Project>
