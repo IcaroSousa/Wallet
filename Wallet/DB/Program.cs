@@ -27,11 +27,16 @@ namespace DB
             List<Person> lPersons = lRepo.GetAll().ToList();
             lPersons.ForEach((Person pPerson) => { Console.WriteLine($"Nome :{pPerson.Name} Sobrenome: {pPerson.LastName}");});
 
-            Person lPerson = lRepo.FindBy(x => x.Id == 3).FirstOrDefault();
+            int.TryParse(Console.ReadLine(), out int lKey);
 
-            Console.WriteLine("---------------");
-            lPersons = lRepo.GetAll().ToList();
-            lPersons.ForEach((Person pPerson) => { Console.WriteLine($"Nome :{pPerson.Name} Sobrenome: {pPerson.LastName}"); });      
+            while(lKey == 0)
+            {
+                Console.WriteLine("---------------");
+                lPersons = lRepo.GetAll().ToList();
+                lPersons.ForEach((Person pPerson) => { Console.WriteLine($"Nome :{pPerson.Name} Sobrenome: {pPerson.LastName}"); }); 
+
+                int.TryParse(Console.ReadLine(), out lKey);
+            }
 
         }
 

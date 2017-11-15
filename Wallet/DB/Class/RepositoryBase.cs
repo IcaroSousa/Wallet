@@ -17,10 +17,10 @@ namespace DB.Class
             set { _Context = value; }
         }
 
-        public RepositoryBase()
+        protected RepositoryBase()
         {
             _Context = new TContext();
-            //_Context.Database.EnsureCreated();
+            _Context.Database.EnsureCreatedAsync();
         }
 
         public virtual void Add(TEntity pEntity) => _Context.Set<TEntity>().Add(pEntity);

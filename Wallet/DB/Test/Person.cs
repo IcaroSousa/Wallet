@@ -4,15 +4,20 @@ using System.ComponentModel.DataAnnotations;
 namespace DB.Test
 {    
     public class Person
-    {        
-        [Key]
+    {                
         public int Id { get; set; }
 
-        [MaxLength(100)]
         public string Name { get; set; }
 
-        [MaxLength(100)]
         public string LastName { get; set; }
+
+        public double Salary { get; set; }
+
+        public bool Active { get; set; }
+
+        public DateTime DateOfCreation { get; set; }
+
+        public DateTime DateOfUpdate { get; set; }
 
         public int Age { get; set; }
 

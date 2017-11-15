@@ -9,9 +9,24 @@ namespace DB.Test
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            
+            optionsBuilder.UseMySQL("server=35.196.72.6;userid=root;password=attack91;database=Wallet;");
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Person>(pX => 
+            {
+                pX.HasKey(pEntity => new { pEntity.Id });
+                pX.Property(pEntity => pEntity.Id).IsRequired().ValueGeneratedOnAdd();
+                pX.Property(pEntity => pEntity.Name).IsRequired().HasMaxLength(100);
+                pX.Property(pEntity => pEntity.LastName).HasMaxLength(100);
+                pX.Property(pEntity => pEntity.Salary).IsRequired();
+                pX.Property(pEntity => pEntity.Active).IsRequired().HasDefaultValue(true);
+                pX.Property(pEntity => pEntity.DateOfCreation).IsRequired().HasDefaultValue(DateTime.Now);
+                pX.Property(pEntity => pEntity.DateOfUpdate).IsRequired();
+                pX.Property(pEntity => pEntity.Age);
+            });
+        }
 
 
     }
