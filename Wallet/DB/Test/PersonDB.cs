@@ -13,7 +13,7 @@ namespace DB.Test
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
+        {            
             modelBuilder.Entity<Person>(pX => 
             {
                 pX.HasKey(pEntity => new { pEntity.Id });
@@ -22,8 +22,8 @@ namespace DB.Test
                 pX.Property(pEntity => pEntity.LastName).HasMaxLength(100);
                 pX.Property(pEntity => pEntity.Salary).IsRequired();
                 pX.Property(pEntity => pEntity.Active).IsRequired().HasDefaultValue(true);
-                pX.Property(pEntity => pEntity.DateOfCreation).IsRequired().HasDefaultValue(DateTime.Now);
-                pX.Property(pEntity => pEntity.DateOfUpdate).IsRequired();
+                pX.Property(pEntity => pEntity.DateOfCreation);
+                pX.Property(pEntity => pEntity.DateOfUpdate);
                 pX.Property(pEntity => pEntity.Age);
             });
         }
