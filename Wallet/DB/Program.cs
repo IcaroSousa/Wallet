@@ -7,6 +7,33 @@ namespace DB
 {    
     static class Program
     {
+        static void Count(int[][] pArray)
+        {
+            int lSum = 0;
+            for (int lIndex = 0; lIndex < 4; lIndex++)
+            {
+                for (int lIndex2 = 0; lIndex2 < 4; lIndex2++)
+                {
+                    int lInternal = 0;
+
+                    lInternal += pArray[lIndex][lIndex2];
+                    lInternal += pArray[lIndex][lIndex2 + 1];
+                    lInternal += pArray[lIndex][lIndex2 + 2];
+                    lInternal += pArray[lIndex + 1][lIndex2 + 1];
+                    lInternal += pArray[lIndex + 2][lIndex2];
+                    lInternal += pArray[lIndex + 2][lIndex2 + 1];
+                    lInternal += pArray[lIndex + 2][lIndex2 + 2];
+
+                    if ((lInternal > lSum) || ((lIndex == 0) && (lIndex2 == 0)))
+                    {
+                        lSum = lInternal;
+                    }
+                }
+            }
+
+            Console.WriteLine(lSum);
+        }
+
         public static void Main()
         {
             PersonRepository lRepo = new PersonRepository();

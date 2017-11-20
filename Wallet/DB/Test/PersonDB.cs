@@ -1,16 +1,17 @@
 ﻿using System;
+using DB.Class;
 using Microsoft.EntityFrameworkCore;
 
 namespace DB.Test
 {
-    public class PersonDB : DbContext
-    {   
-        public DbSet<Person> Persons { get; set; }
-
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    public class PersonDB : EntityDBBase
+    {           
+        public PersonDB()
         {
-            optionsBuilder.UseMySQL("server=35.196.72.6;userid=root;password=attack91;database=Wallet;");
+            ConnectinString = "server=35.196.72.6; userid=root; password=attack91; database=Wallet;";
         }
+
+        public DbSet<Person> Persons { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {            
