@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DB.Class
 {
-    public abstract class RepositoryBase<TContext, TEntity> : IRepositoryBase<TEntity> where TEntity : EntityBase where TContext : DbContext, new()
+    public abstract class RepositoryBase<TContext, TEntity> : IRepositoryBase<TEntity> where TEntity : EntityBase where TContext : EntityDBBase, new()
     {
 
         TContext _Context;
@@ -57,9 +57,29 @@ namespace DB.Class
             Delete(lData);
         }
 
-        public virtual void Delete(TEntity pEntity) => _Context.Set<TEntity>().Remove(pEntity);
+        public virtual void Delete(TEntity pEntity)
+        {
+            _Context.Set<TEntity>().Remove(pEntity);
+            Save();
+        }
 
-        public virtual void Delete(IList<TEntity> pEntities) => _Context.Set<TEntity>().RemoveRange(pEntities.ToArray());
+        public virtual void Delete(IList<TEntity> pEntities)
+        {
+            while(pEntities.Any())
+            {
+                if(pEntities.Count() > _Context.DeletePerTime)
+                {
+                    _Context.Set<TEntity>().RemoveRange(pEntities.Take(_Context.DeletePerTime));
+                }
+                else
+                {
+                    _Context.Set<TEntity>().RemoveRange(pEntities.ToArray());
+                }
+
+                Save();
+            }
+
+        }
 
         public virtual void Save()
         {
