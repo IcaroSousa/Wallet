@@ -51,10 +51,19 @@ namespace DB.Class
 
         public virtual IQueryable<TEntity> GetAll() => _Context.Set<TEntity>();
 
+        public virtual void Delete(Expression<Func<TEntity, bool>> pPredicate)
+        {
+            TEntity[] lData = FindBy(pPredicate).ToArray();
+            Delete(lData);
+        }
+
         public virtual void Delete(TEntity pEntity) => _Context.Set<TEntity>().Remove(pEntity);
 
         public virtual void Delete(IList<TEntity> pEntities) => _Context.Set<TEntity>().RemoveRange(pEntities.ToArray());
 
-        public virtual void Save() => _Context.SaveChanges();
+        public virtual void Save()
+        {
+            _Context.SaveChanges();
+        }
     }
 }

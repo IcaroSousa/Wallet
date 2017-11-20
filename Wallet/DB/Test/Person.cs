@@ -21,9 +21,8 @@ namespace DB.Test
             
         }
 
-        public Person(int pId, string pName, string pLastName, int pAge)
-        {
-            Id = pId;
+        public Person(string pName, string pLastName, int pAge)
+        {            
             Name = pName;
             LastName = pLastName;
             Age = pAge;
